@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Customers(
     
 CREATE TABLE IF NOT EXISTS Customer_Addresses(
     Customer_Email varchar(40) NOT NULL,
-    HouseNo int(10) NOT NULL,
+    House_No int(10) NOT NULL,
     City varchar(30)NOT NULL,
     Postcode varchar(10) NOT NULL,
     FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email));
