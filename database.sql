@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Customer_Addresses(
     FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email));
     
  CREATE TABLE IF NOT EXISTS Services(
-    Service_Name char(30) NOT NULL UNIQUE PRIMARY KEY,
+    Service_Name varchar(30) NOT NULL UNIQUE PRIMARY KEY,
     Service_Description char(100) NOT NULL,
     Service_Price int(5) NOT NULL);
     
