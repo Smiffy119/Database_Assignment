@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Order_Details(
     PRIMARY KEY (Customer_Email, Order_Date_Time, Service_Name),
     FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email),
     FOREIGN KEY (Order_Date_Time) REFERENCES Orders(Order_Date_Time),
-    FOREIGN KEY (Service_Name) REFERENCES Services(Service_Name
+    FOREIGN KEY (Service_Name) REFERENCES Services(Service_Name));
     
 ALTER TABLE customers ADD Customer_MiddleName varchar(30) NOT NULL;
 
