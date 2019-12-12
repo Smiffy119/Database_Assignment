@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS assignment_2;
 CREATE DATABASE IF NOT EXISTS assignment_2;
 USE assignment_2;
 
@@ -16,16 +17,17 @@ CREATE TABLE IF NOT EXISTS Customer_Addresses(
     FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email))
     ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
- CREATE TABLE IF NOT EXISTS Services(
-    Service_Name varchar(100) NOT NULL PRIMARY KEY,
-    Service_Description varchar(255) NOT NULL,
-    Service_Price int(5) NOT NULL)
-    ENGINE=InnoDB DEFAULT CHARSET=latin1;
-    
+
  CREATE TABLE IF NOT EXISTS Staff(
     Staff_Email varchar(40) NOT NULL PRIMARY KEY,
     Staff_FirstName varchar(20) NOT NULL,
     Staff_LastName varchar(20) NOT NULL)
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ 
+ CREATE TABLE IF NOT EXISTS Services(
+    Service_Name varchar(100) NOT NULL PRIMARY KEY,
+    Service_Description varchar(255) NOT NULL,
+    Service_Price int(5) NOT NULL)
     ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS Orders(
@@ -89,4 +91,3 @@ LEFT JOIN order_details on orders.Order_Date_Time = order_details.Order_Date_Tim
 SELECT customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, order_details.Order_Date_Time, order_details.Service_Name, order_details.Service_Ordered_Price, order_details.Discount, order_details.Quantity
 from order_details
 RIGHT JOIN customers ON customers.Customer_Email = order_details.Customer_Email;
-
