@@ -4,7 +4,8 @@ USE assignment_2;
 CREATE TABLE IF NOT EXISTS Customers(
     Customer_Email varchar(40) NOT NULL PRIMARY KEY,
     Customer_FirstName varchar(20) NOT NULL,
-    Customer_LastName varchar(20) NOT NULL);
+    Customer_LastName varchar(20) NOT NULL)
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
 CREATE TABLE IF NOT EXISTS Customer_Addresses(
     Customer_Email varchar(40) NOT NULL,
@@ -12,17 +13,20 @@ CREATE TABLE IF NOT EXISTS Customer_Addresses(
     City varchar(30)NOT NULL,
     Postcode varchar(10) NOT NULL,
     PRIMARY KEY (Customer_Email, Postcode),
-    FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email));
+    FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email))
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
  CREATE TABLE IF NOT EXISTS Services(
     Service_Name varchar(100) NOT NULL PRIMARY KEY,
     Service_Description varchar(255) NOT NULL,
-    Service_Price int(5) NOT NULL);
+    Service_Price int(5) NOT NULL)
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
  CREATE TABLE IF NOT EXISTS Staff(
     Staff_Email varchar(40) NOT NULL PRIMARY KEY,
     Staff_FirstName varchar(20) NOT NULL,
-    Staff_LastName varchar(20) NOT NULL);
+    Staff_LastName varchar(20) NOT NULL)
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS Orders(
     Customer_Email varchar(50) NOT NULL,
@@ -30,19 +34,21 @@ CREATE TABLE IF NOT EXISTS Orders(
     Staff_Email varchar(50) NOT NULL,
     PRIMARY KEY (Customer_Email, Order_Date_Time),
     FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email),
-    FOREIGN KEY (Staff_Email) REFERENCES Staff(Staff_Email));
+    FOREIGN KEY (Staff_Email) REFERENCES Staff(Staff_Email))
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
 CREATE TABLE IF NOT EXISTS Order_Details(
     Customer_Email varchar(50) NOT NULL,
     Order_Date_Time DATETIME NOT NULL,
     Service_Name varchar(100) NOT NULL,
     Service_Ordered_Price int(5) NOT NULL, 
-    Discount varchar (30) NOT NULL, 
+    Discount varchar (30) DEFAULT NULL, 
     Quantity int(5) NOT NULL,
     PRIMARY KEY (Customer_Email, Order_Date_Time, Service_Name),
     FOREIGN KEY (Customer_Email) REFERENCES Customers(Customer_Email),
     FOREIGN KEY (Order_Date_Time) REFERENCES Orders(Order_Date_Time),
-    FOREIGN KEY (Service_Name) REFERENCES Services(Service_Name));
+    FOREIGN KEY (Service_Name) REFERENCES Services(Service_Name))
+    ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
 ALTER TABLE customers ADD Customer_MiddleName varchar(30) NOT NULL;
 
@@ -58,7 +64,7 @@ INSERT INTO services (Service_Name, Service_Description, Service_Price) VALUES (
 
 INSERT INTO orders (Customer_Email, Order_Date_Time, Staff_Email) VALUES ('britteshanks@gmail.com','2019-09-05 10:18:19', 'charmainegandham@lcs.com'), ('clohumphries@gmail.com', '2019-12-01 09:27:25', 'piperduval@lcs.com'), ('dyannakensington@gmail.com', '2019-11-11 08:20:18', 'yevettedesai@lcs.com'), ('hallieelmhirst@gmail.com', '2019-12-10 21:45:55', 'friederikenorbury@lcs.com'), ('kassiasouthgate@gmail.com', '2019-11-18 17:41:29', 'marliesisson@lcs.com'), ('jessamineallan@gmail.com', '2019-11-04 23:43:25', 'pamneilsen@lcs.com'), ('marrislinford@gmail.com', '2019-10-08 07:18:34', 'agnesdolman@lcs.com'), ('nanondaniel@gmail.com', '2019-10-16 12:33:28', 'kamilahmacaulay@lcs.com'), ('melisandefosse@gmail.com', '2019-10-24 13:17:32', 'piperduval@lcs.com'), ('quentinturnbull@gmail.com', '2019-10-26 13:19:22', 'friederikenorbury@lcs.com'), ('soniadougherty@gmail.com', '2019-10-07 08:33:33', 'marliesisson@lcs.com'), ('reebaduke@gmail.com', '2019-09-05 20:40:24', 'charmainegandham@lcs.com'), ('yettakromberg@gmail.com', '2019-12-06 11:29:23', 'xenianeish@lcs.com'), ('benedettaflaxman@gmail.com', '2019-12-02 09:31:18', 'kamilahmacaulay@lcs.com'), ('morganbinnington@gmail.com', '2019-09-25 10:41:31', 'eddiricketts@lcs.com'), ('allsunmackie@gmail.com', '2019-09-01 13:17:36', 'friederikenorbury@lcs.com'), ('andieread@gmail.com', '2019-11-04 12:29:30', 'charmainegandham@lcs.com'), ('emmalinelucas@gmail.com', '2019-10-31 10:20:20', 'pamneilsen@lcs.com'), ('karonfowley@gmail.com', '2019-12-09 09:32:27', 'grethelwarden@lcs.com');
 
-INSERT INTO order_details (Customer_Email, Order_Date_Time, Service_Name, Service_Ordered_Price, Discount, Quantity) VALUES ('allsunmackie@gmail.com', '2019-09-01 13:17:36', 'Desktop power supply failure', '90', '30% off', '1'), ('andieread@gmail.com', '2019-11-04 12:29:30', 'Laptop - Liquid damage/drink spillage', '55', 'Accident help - 10% off', '1'), ('benedettaflaxman@gmail.com', '2019-12-02 09:31:18', 'Laptop - supply and replace broken laptop screen', '120', 'N/A', '1'), ('britteshanks@gmail.com', '2019-09-05 10:18:19', 'Laptop – transfer all data and reinstall programs from hard drive of old laptop to new laptop', '50', 'Buy one, get one half price', '4'), ('clohumphries@gmail.com', '2019-12-01 09:27:25', 'PC - carry out a general service', '60', 'Birthday deal', '1'), ('dyannakensington@gmail.com', '2019-11-11 08:20:18', 'PC - install a new operating system', '50', 'Windows package supplied', '2'), ('emmalinelucas@gmail.com', '2019-10-31 10:20:20', 'PC - Removal of malware', '60', 'Shops faults', '1'), ('hallieelmhirst@gmail.com', '2019-12-10 21:45:55', 'PC- Removal of virus', '60', '15% off', '1'), ('jessamineallan@gmail.com', '2019-11-04 23:43:25', 'Replace desktop hard drive', '130', 'Black Friday', '1'), ('karonfowley@gmail.com', '2019-12-09 09:32:27', 'Supply and replace power socket', '90', 'N/A', '1'), ('kassiasouthgate@gmail.com', '2019-11-18 17:41:29', 'Visit customer’s home to set up a new desktop computer', '55', 'N/A', '1'), ('marrislinford@gmail.com', '2019-10-08 07:18:34', 'PC - install a new operating system', '100', 'Buy one, get one free', '2'), ('melisandefosse@gmail.com', '2019-10-24 13:17:32', 'PC - carry out a general service', '60', '30% off', '1'), ('morganbinnington@gmail.com', '2019-09-25 10:41:31', 'Replace desktop hard drive', '130', 'Black Friday', '1'), ('nanondaniel@gmail.com', '2019-10-16 12:33:28', 'PC - carry out a general service', '60', 'Birthday deal', '1'), ('quentinturnbull@gmail.com', '2019-10-26 13:19:22', 'Laptop - Liquid damage/drink spillage', '55', 'Accident help - 10% off', '1'), ('reebaduke@gmail.com', '2019-09-05 20:40:24', 'PC - install a new operating system', '100', 'Windows package supplied', '2'), ('soniadougherty@gmail.com', '2019-10-07 08:33:33', 'PC- Removal of virus', '60', 'Multiple devices', '4'), ('yettakromberg@gmail.com', '2019-12-06 11:29:23', 'Desktop power supply failure', '90', 'N/A', '1');
+INSERT INTO order_details (Customer_Email, Order_Date_Time, Service_Name, Service_Ordered_Price, Discount, Quantity) VALUES ('allsunmackie@gmail.com', '2019-09-01 13:17:36', 'Desktop power supply failure', '90', '30% off', '1'), ('andieread@gmail.com', '2019-11-04 12:29:30', 'Laptop - Liquid damage/drink spillage', '55', 'Accident help - 10% off', '1'), ('benedettaflaxman@gmail.com', '2019-12-02 09:31:18', 'Laptop - supply and replace broken laptop screen', '120', NULL, '1'), ('britteshanks@gmail.com', '2019-09-05 10:18:19', 'Laptop – transfer all data and reinstall programs from hard drive of old laptop to new laptop', '50', 'Buy one, get one half price', '4'), ('clohumphries@gmail.com', '2019-12-01 09:27:25', 'PC - carry out a general service', '60', 'Birthday deal', '1'), ('dyannakensington@gmail.com', '2019-11-11 08:20:18', 'PC - install a new operating system', '50', 'Windows package supplied', '2'), ('emmalinelucas@gmail.com', '2019-10-31 10:20:20', 'PC - Removal of malware', '60', 'Shops faults', '1'), ('hallieelmhirst@gmail.com', '2019-12-10 21:45:55', 'PC- Removal of virus', '60', '15% off', '1'), ('jessamineallan@gmail.com', '2019-11-04 23:43:25', 'Replace desktop hard drive', '130', 'Black Friday', '1'), ('karonfowley@gmail.com', '2019-12-09 09:32:27', 'Supply and replace power socket', '90', NULL, '1'), ('kassiasouthgate@gmail.com', '2019-11-18 17:41:29', 'Visit customer’s home to set up a new desktop computer', '55', NULL, '1'), ('marrislinford@gmail.com', '2019-10-08 07:18:34', 'PC - install a new operating system', '100', 'Buy one, get one free', '2'), ('melisandefosse@gmail.com', '2019-10-24 13:17:32', 'PC - carry out a general service', '60', '30% off', '1'), ('morganbinnington@gmail.com', '2019-09-25 10:41:31', 'Replace desktop hard drive', '130', 'Black Friday', '1'), ('nanondaniel@gmail.com', '2019-10-16 12:33:28', 'PC - carry out a general service', '60', 'Birthday deal', '1'), ('quentinturnbull@gmail.com', '2019-10-26 13:19:22', 'Laptop - Liquid damage/drink spillage', '55', 'Accident help - 10% off', '1'), ('reebaduke@gmail.com', '2019-09-05 20:40:24', 'PC - install a new operating system', '100', 'Windows package supplied', '2'), ('soniadougherty@gmail.com', '2019-10-07 08:33:33', 'PC- Removal of virus', '60', 'Multiple devices', '4'), ('yettakromberg@gmail.com', '2019-12-06 11:29:23', 'Desktop power supply failure', '90', NULL, '1');
 
 DELETE FROM customer_addresses WHERE Customer_Email = 'allsunmackie@gmail.com';
 
@@ -69,4 +75,18 @@ DELETE FROM orders WHERE Customer_Email = 'allsunmackie@gmail.com';
 DELETE FROM customers WHERE Customer_Email = 'allsunmackie@gmail.com';
 
 UPDATE customer_addresses SET House_No = '863', City= 'Palmdale', Postcode = 'PA93 94LE' WHERE Customer_Email = 'agkayes@gmail.com';
+
+SELECT orders.Order_Date_Time, customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, customer_addresses.House_No, customer_addresses.City, customer_addresses.Postcode
+FROM orders
+LEFT JOIN customers ON orders.Customer_Email = customers.Customer_Email
+LEFT JOIN customer_addresses on customer_addresses.Customer_Email = customers.Customer_Email;
+
+SELECT staff.Staff_Email, staff.Staff_FirstName, staff.Staff_LastName, orders.Order_Date_Time, order_details.Service_Name
+FROM staff
+LEFT JOIN orders ON orders.Staff_Email = staff.Staff_Email
+LEFT JOIN order_details on orders.Order_Date_Time = order_details.Order_Date_Time;
+
+SELECT customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, order_details.Order_Date_Time, order_details.Service_Name, order_details.Service_Ordered_Price, order_details.Discount, order_details.Quantity
+from order_details
+RIGHT JOIN customers ON customers.Customer_Email = order_details.Customer_Email;
 
