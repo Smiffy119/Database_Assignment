@@ -91,3 +91,27 @@ LEFT JOIN order_details on orders.Order_Date_Time = order_details.Order_Date_Tim
 SELECT customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, order_details.Order_Date_Time, order_details.Service_Name, order_details.Service_Ordered_Price, order_details.Discount, order_details.Quantity
 from order_details
 RIGHT JOIN customers ON customers.Customer_Email = order_details.Customer_Email;
+
+///// ADD EDITS FROM TEXT FILE CHROMEBOOK ////
+
+DROP DATABASE IF EXISTS copy_of_assignment_2;
+CREATE DATABASE IF NOT EXISTS copy_of_assignment_2;
+USE copy_of_assignment_2;
+
+CREATE TABLE IF NOT EXISTS copy_of_customers like assignment_2.customers;
+INSERT INTO copy_of_customers SELECT * FROM assignment_2.customers;
+
+CREATE TABLE IF NOT EXISTS copy_of_customer_addresses like assignment_2.customer_addresses;
+INSERT INTO copy_of_customer_addresses SELECT * FROM assignment_2.customer_addresses;
+
+CREATE TABLE IF NOT EXISTS copy_of_orders like assignment_2.orders;
+INSERT INTO copy_of_orders SELECT * FROM assignment_2.orders;
+
+CREATE TABLE IF NOT EXISTS copy_of_order_details like assignment_2.order_details;
+INSERT INTO copy_of_order_details SELECT * FROM assignment_2.order_details;
+
+CREATE TABLE IF NOT EXISTS copy_of_services like assignment_2.services;
+INSERT INTO copy_of_services SELECT * FROM assignment_2.services;
+
+CREATE TABLE IF NOT EXISTS copy_of_staff like assignment_2.staff;
+INSERT INTO copy_of_staff SELECT * FROM assignment_2.staff;
