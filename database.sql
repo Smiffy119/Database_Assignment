@@ -78,21 +78,25 @@ DELETE FROM customers WHERE Customer_Email = 'allsunmackie@gmail.com';
 
 UPDATE customer_addresses SET House_No = '863', City= 'Palmdale', Postcode = 'PA93 94LE' WHERE Customer_Email = 'agkayes@gmail.com';
 
+CREATE VIEW Query_1 AS
 SELECT orders.Order_Date_Time, customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, customer_addresses.House_No, customer_addresses.City, customer_addresses.Postcode
 FROM orders
 LEFT JOIN customers ON orders.Customer_Email = customers.Customer_Email
 LEFT JOIN customer_addresses on customer_addresses.Customer_Email = customers.Customer_Email;
+SELECT * FROM Query_1;
 
+CREATE VIEW Query_2 AS
 SELECT staff.Staff_Email, staff.Staff_FirstName, staff.Staff_LastName, orders.Order_Date_Time, order_details.Service_Name
 FROM staff
 LEFT JOIN orders ON orders.Staff_Email = staff.Staff_Email
 LEFT JOIN order_details on orders.Order_Date_Time = order_details.Order_Date_Time;
+SELECT * FROM Query_2;
 
+CREATE VIEW Query_3 AS
 SELECT customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, order_details.Order_Date_Time, order_details.Service_Name, order_details.Service_Ordered_Price, order_details.Discount, order_details.Quantity
 from order_details
 RIGHT JOIN customers ON customers.Customer_Email = order_details.Customer_Email;
-
-///// ADD EDITS FROM TEXT FILE CHROMEBOOK ////
+SELECT * FROM Query_3;
 
 DROP DATABASE IF EXISTS copy_of_assignment_2;
 CREATE DATABASE IF NOT EXISTS copy_of_assignment_2;
