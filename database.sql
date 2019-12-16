@@ -79,10 +79,10 @@ DELETE FROM customers WHERE Customer_Email = 'allsunmackie@gmail.com';
 UPDATE customer_addresses SET House_No = '863', City= 'Palmdale', Postcode = 'PA93 94LE' WHERE Customer_Email = 'agkayes@gmail.com';
 
 CREATE VIEW Query_1 AS
-SELECT orders.Order_Date_Time, customers.Customer_Email, customers.Customer_FirstName, customers.Customer_LastName, customer_addresses.House_No, customer_addresses.City, customer_addresses.Postcode
-FROM orders
-LEFT JOIN customers ON orders.Customer_Email = customers.Customer_Email
-LEFT JOIN customer_addresses on customer_addresses.Customer_Email = customers.Customer_Email;
+SELECT Customer_Email, Customer_FirstName, Customer_LastName 
+FROM customers 
+WHERE Customer_Email IN 
+(SELECT Customer_Email FROM orders UNION SELECT Customer_Email from orders);
 SELECT * FROM Query_1;
 
 CREATE VIEW Query_2 AS
